@@ -136,6 +136,7 @@ class _AmazonPrimeApi extends ServiceApi {
 	 * These values were retrieved by watching network requests.
 	 */
 	DEVICE_TYPE_ID = 'AOAGZA014O5RE';
+	DEVICE_ID = '1';
 
 	requests = withHeaders({
 		'x-requested-with': 'XMLHttpRequest',
@@ -156,7 +157,7 @@ class _AmazonPrimeApi extends ServiceApi {
 		}
 
 		try {
-			this.CONFIG_URL = `${this.API_URL}/cdp/usage/GetAppStartupConfig?deviceID=&deviceTypeID=${this.DEVICE_TYPE_ID}&firmware=1&gascEnabled=false&version=1`;
+			this.CONFIG_URL = `${this.API_URL}/cdp/usage/GetAppStartupConfig?deviceID=${this.DEVICE_ID}&deviceTypeID=${this.DEVICE_TYPE_ID}&firmware=1&gascEnabled=false&version=1`;
 
 			try {
 				const configResponseText = await Requests.send({
@@ -186,8 +187,8 @@ class _AmazonPrimeApi extends ServiceApi {
 				throw new Error('Failed to activate API');
 			}
 
-			this.ITEM_URL = `${this.API_URL}/cdp/catalog/GetPlaybackResources?asin={id}&consumptionType=Streaming&desiredResources=CatalogMetadata&deviceID=&deviceTypeID=${this.DEVICE_TYPE_ID}&firmware=1&gascEnabled=true&resourceUsage=CacheResources&videoMaterialType=Feature&titleDecorationScheme=primary-content&uxLocale=en_US`;
-			this.NEXT_ITEM_URL = `${this.API_URL}/cdp/discovery/GetSections?decorationScheme=none&deviceID=&deviceTypeID=${this.DEVICE_TYPE_ID}&firmware=1&gascEnabled=true&pageId={id}&pageType=player&sectionTypes=bottom&uxLocale=en_US&version=default`;
+			this.ITEM_URL = `${this.API_URL}/cdp/catalog/GetPlaybackResources?asin={id}&consumptionType=Streaming&desiredResources=CatalogMetadata&deviceID=${this.DEVICE_ID}&deviceTypeID=${this.DEVICE_TYPE_ID}&firmware=1&gascEnabled=true&resourceUsage=CacheResources&videoMaterialType=Feature&titleDecorationScheme=primary-content&uxLocale=en_US`;
+			this.NEXT_ITEM_URL = `${this.API_URL}/cdp/discovery/GetSections?decorationScheme=none&deviceID=${this.DEVICE_ID}&deviceTypeID=${this.DEVICE_TYPE_ID}&firmware=1&gascEnabled=true&pageId={id}&pageType=player&sectionTypes=bottom&uxLocale=en_US&version=default`;
 
 			this.session = {
 				profileName: null,
